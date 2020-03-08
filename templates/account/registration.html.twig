@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 class="my-5">Inscription sur SymBnb</h1>
+        <hr>
+        <p>Bienvenue sur le formulaire d'inscription, ici tu vas pouvoir enregistrer ton compte pour pouvoir poster des annonces !</p>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Informations générales</h2>
+                <hr>
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastName) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.picture) }}
+                <hr>
+                <h2 class="alert-heading mt-2">Confidentialité</h2>
+                <hr>
+                {{ form_row(form.hash) }}
+                {{ form_row(form.passwordConfirm) }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="alert alert-light">
+                <h2 class="alert-heading">
+                    Détails
+                </h2>
+                <hr>
+                {{ form_row(form.introduction) }}
+                {{ form_row(form.description) }}
+
+                <hr>
+
+                <p>Êtes-vous prêts à nous rejoindre ?</p>
+                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Confirmez votre inscription
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}

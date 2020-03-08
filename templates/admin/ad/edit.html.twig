@@ -1,0 +1,147 @@
+{% extends'admin/base.html.twig' %}
+
+{% block title %}Modification de l'annonce n°{{ ad.id }}{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+  <div class="container">
+      <h1 class="my-5">Modification de l'annonce {{ ad.title }}</h1>
+
+      {{ form_start(form) }}
+
+      <div class="row">
+          <div class="col">
+              <div class="card bg-light">
+                  <div class="card-header">
+                      <h4 class="card-tiutle">Corriger l'annonce ?</h4>
+                  </div>
+                  <div class="card-body">
+                      {{ form_widget(form) }}
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card bg-light">
+                  <div class="card-header">
+                      <h4 class="card-title">Les réservations</h4>
+                  </div>
+                  <div class="card-body">
+                      <table class="table">
+                          <thead>
+                          <tr>
+                              <th>Id</th>
+                              <th>Voyageur</th>
+                              <th>Date de réservations</th>
+                              <th></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for booking in ad.bookings %}
+                          <tr>
+
+                              <td>{{ booking.id }}</td>
+                              <td>{{ booking.booker.fullname }}</td>
+                              <td>{{ booking.createdAt | date('d/m/y H:i') }}</td>
+                              <td>
+                                  <a href="" class="btn btn-primary">
+                                      <i class="fas fa-pen"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="card bg-light mt-5">
+                  <div class="card-header">
+                      <h4 class="card-title">Les Commentaires</h4>
+                  </div>
+                  <div class="card-body">
+                      <table class="table">
+                          <thead>
+                          <tr>
+                              <th>Id</th>
+                              <th>Voyageur</th>
+                              <th>note</th>
+                              <th>Commentaire</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for comment in ad.comments %}
+                              <tr>
+
+                                  <td>{{ comment.id }}</td>
+                                  <td>{{ comment.author.fullname }}</td>
+                                  <td>{{ comment.rating }}</td>
+                                  <td>{{ comment.content }}</td>
+                                  <td>
+                                      <a href="" class="btn btn-primary">
+                                          <i class="fas fa-pen"></i>
+                                      </a>
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <button class="btn btn-success mt-5">
+        <i class="fas fa-check"></i>
+        Enregistrer les modifications</button>
+
+      {{ form_end(form) }}
+  </div>
+
+{% endblock %}
+
+{% block _ad_images_widget %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_row %}
+    <div id="block_{{ id }}"></div>
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+        {{ form_errors(form) }}
+                <div class="row align-items-center">
+                    <div class="col-4">
+                        {{ form_widget(form.url) }}
+                        {% if value %}
+                            <div hidden>{‌{ form_row(form.url) }}</div>
+                        <img src="{{ value.url }}" class="img-fluid" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(form.caption) }}
+                        {{ form_errors(form.caption) }}
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{ id }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function() {
+            $('[data-action="delete"]').on('click', function () {
+                const target = this.dataset.target;
+                console.log(target);
+                $(target).remove();
+            })
+        })
+    </script>
+
+{% endblock %}

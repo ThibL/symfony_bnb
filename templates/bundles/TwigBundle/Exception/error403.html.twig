@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Accès refusé{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Oups ! Vous tentez des choses bizarres...</h1>
+        <div class="alert alert-danger">
+            <p> Pas de souci, vous pouvez retourner à l'accueil ou voir nos dernières annonces</p>
+        </div>
+        <a href="{{ path('homepage') }}" class="btn btn-primary">Retour à l'accueil</a>
+        <a href="{{ path('ads_index') }}" class="btn btn-primary">Liste des annonces</a>
+    </div>
+{% endblock %}

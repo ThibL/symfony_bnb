@@ -1,0 +1,83 @@
+.ad-title {
+    padding: 2em;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.ad-title h1, div.ad-title p {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+div.ad-title .btn {
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+.alert a{
+    text-decoration: none;
+}
+.alert btn {
+    color: white;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.carousel-caption {
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+a {
+    color: #222222;
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 50%;
+}
+
+.avatar-mini {
+    max-width: 28px;
+    max-height: 28px;
+    border-radius: 50%;
+}
+
+.datepicker table tr td.disabled {
+    color: firebrick; !important;
+}
+
+.card-header text-center {
+    background-color: #8ae2a9;
+    color: #8ae2a9;
+}
+
+/*.jumbotron {
+    background-color: #8ae2a9;
+}*/
+
+.navbar {
+    background-color: #8ae2a9;
+}
+
+.lead {
+    color: #213d2a;
+}
+
+span.rating i {
+    color: goldenrod;
+}
+
+.avatar-micro {
+    max-width: 30px;
+    max-height: 30px;
+}
