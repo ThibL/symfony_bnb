@@ -5,13 +5,13 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
 {
@@ -41,11 +41,11 @@ class AdController extends AbstractController
      * @Route("/ads/new", name="ads_create")
      *
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      *
      * @return Response
      */
-    public function create(Request $request, ObjectManager $manager)
+    public function create(Request $request, EntityManagerInterface $manager)
     {
         $ad = new Ad();
 
@@ -85,10 +85,10 @@ class AdController extends AbstractController
      *
      * @param Ad $ad
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function edit(Ad $ad, Request $request, ObjectManager $manager)
+    public function edit(Ad $ad, Request $request, EntityManagerInterface $manager)
     {
 
         $form = $this->createForm(AdType::class, $ad);
@@ -139,10 +139,10 @@ class AdController extends AbstractController
      *
      * @Route("/ads/{slug}/delete", name="ads_delete")
      * @param Ad $ad
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function delete(Ad $ad, ObjectManager $manager)
+    public function delete(Ad $ad, EntityManagerInterface $manager)
     {
         $manager->remove($ad);
         $manager->flush();

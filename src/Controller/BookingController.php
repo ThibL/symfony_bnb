@@ -7,12 +7,12 @@ use App\Entity\Booking;
 use App\Entity\Comment;
 use App\Form\BookingType;
 use App\Form\CommentType;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookingController extends AbstractController
 {
@@ -21,7 +21,7 @@ class BookingController extends AbstractController
      *
      * @IsGranted("ROLE_USER")
      */
-    public function book(Ad $ad, Request $request, ObjectManager $manager)
+    public function book(Ad $ad, Request $request, EntityManagerInterface $manager)
     {
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking,  [
@@ -68,7 +68,7 @@ class BookingController extends AbstractController
      * @Route("/booking/{id}", name="booking_show")
      * @return Response
      */
-    public function show(Booking $booking, ObjectManager $manager, Request $request) {
+    public function show(Booking $booking, EntityManagerInterface $manager, Request $request) {
         $comment = new Comment();
 
         $form = $this->createForm(CommentType::class, $comment);

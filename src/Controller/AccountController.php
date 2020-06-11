@@ -2,20 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\PasswordUpdate;
 use App\Entity\User;
 use App\Form\AccountType;
-use App\Form\PasswordUpdateType;
+use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\PasswordUpdateType;
 use Symfony\Component\Form\FormError;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class AccountController
@@ -25,12 +26,12 @@ class AccountController extends AbstractController
 {
     /**
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      * @Route("/register", name="account_register")
      */
-    public function register(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
@@ -82,10 +83,10 @@ class AccountController extends AbstractController
      *
      * @Route("/account/profile", name="account_profile")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function profile(Request $request, ObjectManager $manager) {
+    public function profile(Request $request, EntityManagerInterface $manager) {
         $user = $this->getUser();
         $form = $this->createForm(AccountType::class, $user);
 
@@ -113,11 +114,11 @@ class AccountController extends AbstractController
      *
      * @Route("/account/password-update", name="account_password")
      * @param Request $request
-     * @param ObjectManager $manager
+     * @param EntityManagerInterface $manager
      * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function updatePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
+    public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
         $passwordUpdate = new PasswordUpdate();
 
         $user = $this->getUser();
