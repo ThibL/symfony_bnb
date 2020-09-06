@@ -8,7 +8,7 @@ use App\Form\AdminCommentType;
 use App\Service\PaginationService;
 use App\Repository\CommentRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +37,7 @@ class AdminCommentController extends AbstractController
      *
      * @Route("/admin/comment/{id}/edit", name="admin_comments_edit")
      */
-    public function edit(Comment $comment, Request$request ,ObjectManager $manager) {
+    public function edit(Comment $comment, Request$request ,EntityManagerInterface $manager) {
         $form = $this->createForm(AdminCommentType::class, $comment);
 
         $form->handleRequest($request);
@@ -62,7 +62,7 @@ class AdminCommentController extends AbstractController
      * @return Response
      * @Route("/admin/comments/{id}/delete", name="admin_comments_delete")
      */
-    public function delete(Comment $comment, ObjectManager $manager) {
+    public function delete(Comment $comment, EntityManagerInterface $manager) {
         $manager->remove($comment);
         $manager->flush();
 
